@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=social-media-db'
+      - 'POSTGRES_PASSWORD=password12'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432:5432'
