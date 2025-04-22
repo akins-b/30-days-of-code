@@ -1,8 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,7 +12,11 @@ public class Otp {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     long id;
     String otp;
-    long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    Users user;
+
     Date expiryTime;
-    Date createdAt;
+    Date createdAt = new Date();
 }

@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#Environment variables ###
+.env
+
+#Jwt secret
+src/main/resources/.jwt_secret

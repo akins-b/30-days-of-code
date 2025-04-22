@@ -1,9 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,22 +10,24 @@ import java.util.Date;
 public class Users {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    long id;
+    private long id;
 
     @Column(unique = true, nullable = false)
-    String username;
+    private String username;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     @Column(unique = true, nullable = false)
-    String email;
+    private String email;
 
-    String firstName;
-    String lastName;
-    String role;
-    boolean isVerified = false;
-    String course;
-    Date createdAt = new Date();
-    Date updatedAt;
+    private String firstName;
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+    private boolean isVerified;
+    private String course;
+    private Date createdAt;
+    private Date updatedAt;
 }

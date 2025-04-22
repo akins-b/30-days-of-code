@@ -1,8 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -11,6 +9,12 @@ public class Likes {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     long id;
-    long postId;
-    long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    Posts post;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    Users user;
 }

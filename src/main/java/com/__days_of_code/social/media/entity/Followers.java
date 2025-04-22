@@ -1,8 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,7 +10,15 @@ import java.util.Date;
 public class Followers {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    long followerId;
-    long followingId;
-    Date createdAt;
+    long id;
+
+    @ManyToOne
+    @JoinColumn(name = "follower_user_id", nullable = false)
+    Users follower;
+
+    @ManyToOne
+    @JoinColumn(name = "following_user_id", nullable = false)
+    Users following;
+
+    Date createdAt = new Date();
 }

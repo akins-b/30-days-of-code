@@ -1,29 +1,33 @@
 package com.__days_of_code.social.media.controller;
 
 import com.__days_of_code.social.media.dto.request.LoginRequest;
+import com.__days_of_code.social.media.dto.request.RegistrationRequest;
+import com.__days_of_code.social.media.dto.request.VerifyOtpRequest;
 import com.__days_of_code.social.media.entity.Users;
+import com.__days_of_code.social.media.service.OtpService;
 import com.__days_of_code.social.media.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     final UserService userService;
+    final private OtpService otpService;
 
     @PostMapping("/register")
-    public Users registerUser(@RequestBody Users user) {
-        return userService.registerUser(user);
+    public Users registerUser(@RequestBody RegistrationRequest request) {
+        return userService.registerUser(request);
     }
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest request) {
-        return userService.verify(request);
+        return userService.verifyUser(request);
     }
 
-
+    @PostMapping("/verify/otp")
+    public void verifyOtp(@RequestBody VerifyOtpRequest request) {
+        userService.verifyOtp(request);
+    }
 }
