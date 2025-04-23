@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Followers {
+public class Follower {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     long id;

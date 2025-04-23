@@ -5,14 +5,14 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Dislikes {
+public class Like {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     long id;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    Posts post;
+    Post post;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
