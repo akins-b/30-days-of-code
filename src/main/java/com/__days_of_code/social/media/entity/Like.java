@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name= "post_likes")
 public class Like {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

@@ -20,5 +20,5 @@ public class Follower {
     @JoinColumn(name = "following_user_id", nullable = false)
     Users following;
 
-    Date createdAt = new Date();
+    Date createdAt;
 }
