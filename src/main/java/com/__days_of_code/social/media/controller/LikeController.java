@@ -25,7 +25,7 @@ public class LikeController {
         return ResponseEntity.ok("Post liked successfully");
     }
 
-    @PostMapping("/unlike")
+    @DeleteMapping("/unlike")
     public ResponseEntity<?> unlikeEntity(@RequestBody LikeRequest request){
         likeService.unlikeEntity(request);
         return ResponseEntity.ok("Post unliked successfully");

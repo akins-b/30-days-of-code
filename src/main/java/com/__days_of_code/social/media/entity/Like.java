@@ -24,5 +24,6 @@ public class Like {
     @JoinColumn(name = "user_id", nullable = false)
     Users user;
 
+    @Column(name = "created_at", nullable = false)
     Date createdAt;
 }
