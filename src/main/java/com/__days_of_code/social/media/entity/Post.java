@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Post {
+public class Post implements Likeable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     long id;
