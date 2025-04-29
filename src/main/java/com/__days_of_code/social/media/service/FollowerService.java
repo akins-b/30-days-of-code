@@ -3,6 +3,7 @@ package com.__days_of_code.social.media.service;
 import com.__days_of_code.social.media.dto.request.FollowRequest;
 import com.__days_of_code.social.media.dto.response.UserResponse;
 import com.__days_of_code.social.media.entity.Follower;
+import com.__days_of_code.social.media.exception.EntityNotFoundException;
 import com.__days_of_code.social.media.repo.FollowerRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +21,16 @@ public class FollowerService {
     public void followUser(FollowRequest request) {
         Follower follower = new Follower();
         follower.setFollower(userRepo.findById(request.getFollowerUserId())
-                .orElseThrow(() -> new RuntimeException("Follower not found")));
+                .orElseThrow(() -> new EntityNotFoundException("Follower not found")));
         follower.setFollowing(userRepo.findById(request.getFollowerUserId())
-                .orElseThrow(() -> new RuntimeException("Following not found")));
+                .orElseThrow(() -> new EntityNotFoundException("Following not found")));
         follower.setCreatedAt(new Date());
         followerRepo.save(follower);
     }
 
     public void unfollowUser(FollowRequest request){
         Follower follower = followerRepo.findById(request.getFollowingUserId())
-                .orElseThrow(() -> new RuntimeException("Following not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Following not found"));
         followerRepo.delete(follower);
     }
 

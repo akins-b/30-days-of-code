@@ -1,9 +1,9 @@
 package com.__days_of_code.social.media.service;
 
+import com.__days_of_code.social.media.exception.EmailServiceException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class EmailService {
             mailSender.send(message);
         }
         catch (MessagingException e) {
-            throw new RuntimeException("Failed to send email", e);
+            throw new EmailServiceException("Failed to send email", e);
         }
     }
 }

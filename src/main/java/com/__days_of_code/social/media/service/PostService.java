@@ -4,7 +4,9 @@ import com.__days_of_code.social.media.dto.request.CreatePostRequest;
 import com.__days_of_code.social.media.dto.request.UpdatePostRequest;
 import com.__days_of_code.social.media.dto.response.PostResponse;
 import com.__days_of_code.social.media.entity.Post;
-import com.__days_of_code.social.media.entity.PostStatus;
+import com.__days_of_code.social.media.enums.PostStatus;
+import com.__days_of_code.social.media.exception.EntityNotFoundException;
+import com.__days_of_code.social.media.exception.UserNotFoundException;
 import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,7 @@ public class PostService {
         post.setBody(request.getBody());
         post.setMediaLink(request.getMediaLink());
         post.setUser(userRepo.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
         post.setCreatedAt(new Date());
         post.setStatus(PostStatus.DRAFT);
         Post savedPost = postRepo.save(post);
@@ -37,7 +39,7 @@ public class PostService {
 
     public PostResponse publishPost(Long postId) {
         Post post = postRepo.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
         post.setStatus(PostStatus.PUBLISHED);
         post.setPublishedAt(new Date());
         Post publishedPost = postRepo.save(post);
@@ -46,7 +48,7 @@ public class PostService {
 
     public PostResponse updatePost(UpdatePostRequest request){
         Post post = postRepo.findById(request.getId())
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
         post.setTitle(request.getTitle());
         post.setBody(request.getBody());
         post.setMediaLink(request.getMediaLink());
@@ -57,7 +59,7 @@ public class PostService {
 
     public void deletePost(Long postId){
         Post post = postRepo.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
         postRepo.delete(post);
     }
 
@@ -70,7 +72,7 @@ public class PostService {
 
     public List<PostResponse> getPostsByStatus(PostStatus status){
         List<Post> posts = postRepo.findByStatus(status)
-                .orElseThrow(() -> new RuntimeException("No posts found with status: " + status));
+                .orElseThrow(() -> new EntityNotFoundException("No posts found with status: " + status));
         return posts.stream()
                 .map(post -> mapper.map(post, PostResponse.class))
                 .toList();

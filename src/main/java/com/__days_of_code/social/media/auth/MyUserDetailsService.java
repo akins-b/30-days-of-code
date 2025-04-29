@@ -1,7 +1,7 @@
-package com.__days_of_code.social.media.service;
+package com.__days_of_code.social.media.auth;
 
-import com.__days_of_code.social.media.entity.CustomUserDetails;
 import com.__days_of_code.social.media.entity.Users;
+import com.__days_of_code.social.media.exception.UserNotFoundException;
 import com.__days_of_code.social.media.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +15,9 @@ public class MyUserDetailsService implements UserDetailsService {
     private final UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UserNotFoundException {
         Users user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
         return new CustomUserDetails(user);
     }
 }

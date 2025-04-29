@@ -1,5 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
+import com.__days_of_code.social.media.enums.PostStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,4 +23,9 @@ public class Post implements Likeable {
     Date createdAt;
     Date publishedAt;
     Date updatedAt;
+
+    @Override
+    public long getId() {
+        return id;
+    }
 }

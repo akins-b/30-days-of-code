@@ -1,4 +1,4 @@
-package com.__days_of_code.social.media.entity;
+package com.__days_of_code.social.media.enums;
 
 public enum PostStatus {
     DRAFT,

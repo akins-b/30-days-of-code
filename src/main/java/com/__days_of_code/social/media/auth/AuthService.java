@@ -1,13 +1,20 @@
-package com.__days_of_code.social.media.service;
+package com.__days_of_code.social.media.auth;
 
 import com.__days_of_code.social.media.dto.request.LoginRequest;
 import com.__days_of_code.social.media.dto.request.RegistrationRequest;
 import com.__days_of_code.social.media.dto.request.VerifyOtpRequest;
 import com.__days_of_code.social.media.entity.Otp;
-import com.__days_of_code.social.media.entity.UserRole;
+import com.__days_of_code.social.media.enums.UserRole;
 import com.__days_of_code.social.media.entity.Users;
+import com.__days_of_code.social.media.exception.BadRequestException;
+import com.__days_of_code.social.media.exception.EntityNotFoundException;
+import com.__days_of_code.social.media.exception.UnauthorizedException;
+import com.__days_of_code.social.media.exception.UserNotFoundException;
+import com.__days_of_code.social.media.jwt.JWTService;
 import com.__days_of_code.social.media.repo.OtpRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
+import com.__days_of_code.social.media.service.EmailService;
+import com.__days_of_code.social.media.service.OtpService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +29,7 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class AuthService {
     private final UserRepo userRepo;
     private final JWTService jwtService;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -58,7 +65,7 @@ public class UserService {
 
     public String verifyUser(LoginRequest request) {
         Users user = userRepo.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         if (user.isVerified()){
             Authentication authentication = authenticationManager.authenticate
@@ -67,19 +74,21 @@ public class UserService {
             if (authentication.isAuthenticated()){
                 return jwtService.generateToken(request.getUsername());
             }
-            return "failed";
+            else {
+                throw new UnauthorizedException("Invalid credentials");
+            }
         }
         else {
-            throw new IllegalArgumentException("User not verified");
+            throw new UnauthorizedException("User not verified");
         }
     }
 
     public void verifyOtp(VerifyOtpRequest request) {
         Otp otpEntity =  otpRepo.findByUserIdAndOtp(request.getUserId(), request.getOtp())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid OTP"));
+                .orElseThrow(() -> new EntityNotFoundException("Invalid OTP"));
 
         if (otpEntity.getExpiryTime().before(new Date())){
-            throw new IllegalArgumentException("OTP has expired");
+            throw new BadRequestException("OTP has expired");
         }
         else {
             Users user = otpEntity.getUser();

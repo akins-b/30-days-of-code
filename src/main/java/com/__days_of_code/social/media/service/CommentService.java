@@ -4,6 +4,8 @@ import com.__days_of_code.social.media.dto.request.CreateCommentRequest;
 import com.__days_of_code.social.media.dto.request.UpdateCommentRequest;
 import com.__days_of_code.social.media.dto.response.CommentResponse;
 import com.__days_of_code.social.media.entity.Comment;
+import com.__days_of_code.social.media.exception.EntityNotFoundException;
+import com.__days_of_code.social.media.exception.UserNotFoundException;
 import com.__days_of_code.social.media.repo.CommentRepo;
 import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
@@ -24,8 +26,8 @@ public class CommentService {
 
     public CommentResponse createComment(CreateCommentRequest request) {
         Comment comment = new Comment();
-        comment.setPost(postRepo.findById(request.getPostId()).orElseThrow(() -> new RuntimeException("Post not found")));
-        comment.setUser(userRepo.findById(request.getUserId()).orElseThrow(() -> new RuntimeException("User not found")));
+        comment.setPost(postRepo.findById(request.getPostId()).orElseThrow(() -> new EntityNotFoundException("Post not found")));
+        comment.setUser(userRepo.findById(request.getUserId()).orElseThrow(() -> new UserNotFoundException("User not found")));
         comment.setContent(request.getContent());
         comment.setCreatedAt(new Date());
         commentRepo.save(comment);
@@ -35,7 +37,7 @@ public class CommentService {
     }
 
     public CommentResponse updateComment(UpdateCommentRequest request) {
-        Comment comment = commentRepo.findById(request.getId()).orElseThrow(() -> new RuntimeException("Comment not found"));
+        Comment comment = commentRepo.findById(request.getId()).orElseThrow(() -> new EntityNotFoundException("Comment not found"));
         comment.setContent(request.getContent());
         comment.setUpdatedAt(new Date());
         commentRepo.save(comment);
@@ -45,7 +47,7 @@ public class CommentService {
     }
 
     public void deleteComment(Long commentId) {
-        Comment comment = commentRepo.findById(commentId).orElseThrow(() -> new RuntimeException("Comment not found"));
+        Comment comment = commentRepo.findById(commentId).orElseThrow(() -> new EntityNotFoundException("Comment not found"));
         commentRepo.delete(comment);
     }
 

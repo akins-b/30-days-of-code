@@ -1,5 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
+import com.__days_of_code.social.media.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 

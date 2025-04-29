@@ -3,7 +3,7 @@ package com.__days_of_code.social.media.controller;
 import com.__days_of_code.social.media.dto.request.CreatePostRequest;
 import com.__days_of_code.social.media.dto.request.UpdatePostRequest;
 import com.__days_of_code.social.media.dto.response.PostResponse;
-import com.__days_of_code.social.media.entity.PostStatus;
+import com.__days_of_code.social.media.enums.PostStatus;
 import com.__days_of_code.social.media.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

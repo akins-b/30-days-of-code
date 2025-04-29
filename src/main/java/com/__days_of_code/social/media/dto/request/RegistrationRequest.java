@@ -1,6 +1,6 @@
 package com.__days_of_code.social.media.dto.request;
 
-import com.__days_of_code.social.media.entity.UserRole;
+import com.__days_of_code.social.media.enums.UserRole;
 import lombok.Data;
 
 import java.util.Date;

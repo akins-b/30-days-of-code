@@ -1,5 +1,6 @@
-package com.__days_of_code.social.media.service;
+package com.__days_of_code.social.media.jwt;
 
+import com.__days_of_code.social.media.exception.JwtServiceException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -30,7 +31,7 @@ public class JWTService {
             this.secretKey = loadOrGenerateSecretKey();
         }
         catch (Exception e) {
-            throw new RuntimeException("Error loading/generating the JWT secret key", e);
+            throw new JwtServiceException("Error loading/generating the JWT secret key", e);
         }
     }
 
@@ -52,7 +53,7 @@ public class JWTService {
             }
         }
         catch (Exception e) {
-            throw new RuntimeException("Error reading/writing the JWT secret key file", e);
+            throw new JwtServiceException("Error reading/writing the JWT secret key file", e);
         }
     }
 

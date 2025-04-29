@@ -24,4 +24,9 @@ public class Comment implements Likeable {
     String content;
     Date createdAt;
     Date updatedAt;
+
+    @Override
+    public long getId() {
+        return id;
+    }
 }
