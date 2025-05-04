@@ -15,6 +15,11 @@ public class OtpService {
 
     private final OtpRepo otpRepo;
 
+    /**
+     * Generates a random OTP (One-Time Password).
+     *
+     * @return a string representation of the generated OTP
+     */
     public String generateOtp(){
         Random random = new Random();
         int otp = random.nextInt(900000);

@@ -10,5 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
-    Optional<List<Post>> findByStatus(PostStatus status);
+    Optional<List<Post>> findAllByUserIdAndStatus(long userId, PostStatus status);
+    Optional<List<Post>> findAllByUserId(long userId);
 }

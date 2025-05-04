@@ -26,6 +26,10 @@ public class JWTService {
     private static final String SECRET_FILE_PATH = "src/main/resources/.jwt_secret";
     private final SecretKey secretKey;
 
+    /**
+     * Constructor to initialize the JWTService.
+     * It loads or generates the secret key used for signing JWT tokens.
+     */
     public JWTService(){
         try {
             this.secretKey = loadOrGenerateSecretKey();
@@ -35,6 +39,7 @@ public class JWTService {
         }
     }
 
+    // Method to load or generate the secret key
     private SecretKey loadOrGenerateSecretKey(){
         try {
             File file = new File(SECRET_FILE_PATH);
@@ -57,6 +62,7 @@ public class JWTService {
         }
     }
 
+    // Method to generate a JWT token
     public String generateToken(String username){
         Map<String, Object> claims = new HashMap<>();
 
@@ -71,15 +77,18 @@ public class JWTService {
                 .compact();
     }
 
+    // Method to extract the username from the token
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
 
+    // Generic method to extract individual claims from the token
     private <T> T extractClaim(String token, Function<Claims,T> claimsResolver){
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    // Method to extract all claims from the token
     private Claims extractAllClaims(String token){
         return Jwts.parser()
                 .verifyWith(secretKey)
@@ -88,15 +97,18 @@ public class JWTService {
                 .getPayload();
     }
 
+    // Method to validate the token
     public boolean validateToken(String token, UserDetails userDetails){
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())&& !isTokenExpired(token));
     }
 
+    // Method to check if the token is expired
     private boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
     }
 
+    // Method to extract the expiration date from the token
     private Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }

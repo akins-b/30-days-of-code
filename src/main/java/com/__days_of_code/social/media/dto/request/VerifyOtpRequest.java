@@ -6,6 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class VerifyOtpRequest {
-    long userId;
+    String email;
     String otp;
 }

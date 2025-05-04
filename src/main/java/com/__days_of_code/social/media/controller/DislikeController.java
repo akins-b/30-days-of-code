@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.*;
 public class DislikeController {
     private final DislikeService dislikeService;
 
+    // Endpoint to get all dislikes
     @GetMapping("/all")
     public ResponseEntity<DislikeResponse> getAllDislikes(@RequestBody QueryDislike request){
         return ResponseEntity.ok(dislikeService.getAllDislikes(request));
     }
 
-    @PostMapping("/dislike")
+    // Endpoint to add a dislike
+    @PostMapping("/add")
     public ResponseEntity<?> dislikeEntity(@RequestBody DislikeRequest request){
         dislikeService.dislikeEntity(request);
-        return ResponseEntity.ok("Post disliked successfully");
+        return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping("/undislike")
+    // Endpoint to remove a dislike
+    @DeleteMapping("/remove")
     public ResponseEntity<?> undislikeEntity(@RequestBody DislikeRequest request){
         dislikeService.undislikeEntity(request);
-        return ResponseEntity.ok("Post undisliked successfully");
+        return ResponseEntity.status(204).build();
     }
 
 }

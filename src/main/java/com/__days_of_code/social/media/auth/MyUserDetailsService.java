@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
     private final UserRepo userRepo;
 
+    // This method is used by Spring Security to load user details for authentication
     @Override
     public UserDetails loadUserByUsername(String username) throws UserNotFoundException {
         Users user = userRepo.findByUsername(username)

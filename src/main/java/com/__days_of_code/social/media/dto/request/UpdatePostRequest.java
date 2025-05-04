@@ -7,6 +7,5 @@ public class UpdatePostRequest {
     long id;
     String title;
     String body;
-    long userId;
     String mediaLink;
 }

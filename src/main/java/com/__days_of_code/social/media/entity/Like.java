@@ -1,5 +1,6 @@
 package com.__days_of_code.social.media.entity;
 
+import com.__days_of_code.social.media.enums.LikeableType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,8 +17,9 @@ public class Like {
     @Column(name="likeable_id", nullable = false)
     Long likeableId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="likeable_type", nullable = false)
-    String likeableType;
+    LikeableType likeableType;
 
 
     @ManyToOne

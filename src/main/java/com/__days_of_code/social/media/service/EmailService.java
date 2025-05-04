@@ -8,12 +8,28 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Pattern;
+
 @Service
 @RequiredArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
+    /**
+     * Sends an OTP to the user's email for verification.
+     *
+     * @param userEmail the email address of the user
+     * @param otp       the OTP to be sent
+     */
     public void sendOtp(String userEmail, String otp){
+        // Validate the email format
+        if (!EMAIL_PATTERN.matcher(userEmail).matches()) {
+            throw new EmailServiceException("Invalid email format");
+        }
+
+        // Attempt to send the email
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);

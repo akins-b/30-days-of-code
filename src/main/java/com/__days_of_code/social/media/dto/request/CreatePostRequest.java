@@ -6,6 +6,5 @@ import lombok.Data;
 public class CreatePostRequest {
     String title;
     String body;
-    long userId;
     String mediaLink;
 }

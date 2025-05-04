@@ -14,20 +14,23 @@ import org.springframework.web.bind.annotation.*;
 public class LikeController {
     private final LikeService likeService;
 
+    // Endpoint to get all likes
     @GetMapping("/all")
     public ResponseEntity<LikeResponse> getAllLikes(@RequestBody QueryLike request){
         return ResponseEntity.ok(likeService.getAllLikes(request));
     }
 
-    @PostMapping("/like")
+    // Endpoint to add a like
+    @PostMapping("/add")
     public ResponseEntity<?> likeEntity(@RequestBody LikeRequest request){
         likeService.likeEntity(request);
-        return ResponseEntity.ok("Post liked successfully");
+        return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping("/unlike")
+    // Endpoint to remove a like
+    @PostMapping("/remove")
     public ResponseEntity<?> unlikeEntity(@RequestBody LikeRequest request){
         likeService.unlikeEntity(request);
-        return ResponseEntity.ok("Post unliked successfully");
+        return ResponseEntity.status(204).build();
     }
 }

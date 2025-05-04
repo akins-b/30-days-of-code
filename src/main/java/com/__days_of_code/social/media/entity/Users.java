@@ -1,10 +1,12 @@
 package com.__days_of_code.social.media.entity;
 
 import com.__days_of_code.social.media.enums.UserRole;
+import com.__days_of_code.social.media.jwt.Token;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +29,10 @@ public class Users {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
+
     private boolean isVerified;
     private String course;
     private Date createdAt;

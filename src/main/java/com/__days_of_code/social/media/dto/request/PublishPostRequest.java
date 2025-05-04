@@ -3,8 +3,6 @@ package com.__days_of_code.social.media.dto.request;
 import lombok.Data;
 
 @Data
-public class CreateCommentRequest {
-    Long postId;
-    String content;
-
+public class PublishPostRequest {
+    long postId;
 }

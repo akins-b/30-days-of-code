@@ -24,6 +24,9 @@ public class Post implements Likeable {
     Date publishedAt;
     Date updatedAt;
 
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    int shareCount;
+
     @Override
     public long getId() {
         return id;

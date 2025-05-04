@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class UpdateCommentRequest {
     long id;
+    long postId;
     String content;
 }
