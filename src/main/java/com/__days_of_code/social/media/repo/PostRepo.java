@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface PostRepo extends JpaRepository<Post, Long> {
     Optional<List<Post>> findAllByUserIdAndStatus(long userId, PostStatus status);
     Optional<List<Post>> findAllByUserId(long userId);
+
+    int countByUserId(long userId);
 }

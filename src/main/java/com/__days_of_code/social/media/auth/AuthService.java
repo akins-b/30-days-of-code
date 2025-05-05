@@ -1,22 +1,20 @@
 package com.__days_of_code.social.media.auth;
 
-import com.__days_of_code.social.media.dto.request.ResendEmailRequest;
-import com.__days_of_code.social.media.dto.request.LoginRequest;
-import com.__days_of_code.social.media.dto.request.RegistrationRequest;
-import com.__days_of_code.social.media.dto.request.VerifyOtpRequest;
+import com.__days_of_code.social.media.dto.request.*;
 import com.__days_of_code.social.media.dto.response.AuthResponse;
+import com.__days_of_code.social.media.dto.response.UserProfileResponse;
 import com.__days_of_code.social.media.entity.Otp;
+import com.__days_of_code.social.media.entity.UserProfile;
 import com.__days_of_code.social.media.enums.TokenType;
 import com.__days_of_code.social.media.enums.UserRole;
 import com.__days_of_code.social.media.entity.Users;
 import com.__days_of_code.social.media.exception.*;
 import com.__days_of_code.social.media.jwt.JWTService;
 import com.__days_of_code.social.media.jwt.Token;
-import com.__days_of_code.social.media.repo.OtpRepo;
-import com.__days_of_code.social.media.repo.TokenRepo;
-import com.__days_of_code.social.media.repo.UserRepo;
+import com.__days_of_code.social.media.repo.*;
 import com.__days_of_code.social.media.service.EmailService;
 import com.__days_of_code.social.media.service.OtpService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -42,6 +40,10 @@ public class AuthService {
     private final EmailService emailService;
     private final OtpRepo otpRepo;
     private final TokenRepo tokenRepo;
+    private final ModelMapper modelMapper;
+    private final FollowerRepo followRepo;
+    private final PostRepo postRepo;
+    private final UserProfileRepo userProfileRepo;
 
     public void registerUser(RegistrationRequest request){
         try {
@@ -51,6 +53,8 @@ public class AuthService {
             user.setEmail(request.getEmail());
             user.setFirstName(request.getFirstName());
             user.setLastName(request.getLastName());
+            user.setCourse(request.getCourse());
+            user.setCreatedAt(new Date());
             user.setRole(UserRole.USER);
 
             // Encrypt the password before saving
@@ -63,6 +67,12 @@ public class AuthService {
 
             // Save user to database
             Users savedUser = userRepo.save(user);
+
+            UserProfile profile = new UserProfile();
+            profile.setUser(user);
+            user.setUserProfile(profile);
+
+            userProfileRepo.save(profile);
 
             // Save OTP to database
             Otp otpEntity = new Otp();
@@ -184,4 +194,6 @@ public class AuthService {
         }
         throw new UnauthorizedException("User not authenticated");
     }
+
+
 }

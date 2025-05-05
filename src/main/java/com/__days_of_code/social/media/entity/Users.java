@@ -33,6 +33,9 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
+    @OneToOne(mappedBy = "user")
+    private UserProfile userProfile;
+
     private boolean isVerified;
     private String course;
     private Date createdAt;

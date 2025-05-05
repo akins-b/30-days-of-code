@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/follow")
 @RequiredArgsConstructor
 public class FollowerController {
     private final FollowerService followerService;
@@ -30,7 +29,7 @@ public class FollowerController {
         return ResponseEntity.noContent().build();
     }
 
-    // Enpoint to see all followers of a user
+    // Endpoint to see all followers of a user
     @GetMapping("/all/followers")
     public ResponseEntity<List<UserResponse>> getAllFollowers() {
         List<UserResponse> followers = followerService.getAllFollowers();

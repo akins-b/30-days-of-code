@@ -1,10 +1,8 @@
 package com.__days_of_code.social.media.auth;
 
-import com.__days_of_code.social.media.dto.request.ResendEmailRequest;
-import com.__days_of_code.social.media.dto.request.LoginRequest;
-import com.__days_of_code.social.media.dto.request.RegistrationRequest;
-import com.__days_of_code.social.media.dto.request.VerifyOtpRequest;
+import com.__days_of_code.social.media.dto.request.*;
 import com.__days_of_code.social.media.dto.response.AuthResponse;
+import com.__days_of_code.social.media.dto.response.UserProfileResponse;
 import com.__days_of_code.social.media.entity.Users;
 import com.__days_of_code.social.media.service.OtpService;
 import jakarta.validation.Valid;
@@ -46,4 +44,5 @@ public class AuthController {
     public void resendOtp(@RequestBody ResendEmailRequest request) {
         authService.resendOtp(request);
     }
+
 }
