@@ -6,14 +6,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,42 +20,14 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
-    private static final String SECRET_FILE_PATH = "src/main/resources/.jwt_secret";
     private final SecretKey secretKey;
 
-    /**
-     * Constructor to initialize the JWTService.
-     * It loads or generates the secret key used for signing JWT tokens.
-     */
-    public JWTService(){
+    public JWTService(@Value("${jwt.secret:}") String secret) {
         try {
-            this.secretKey = loadOrGenerateSecretKey();
-        }
-        catch (Exception e) {
-            throw new JwtServiceException("Error loading/generating the JWT secret key", e);
-        }
-    }
-
-    // Method to load or generate the secret key
-    private SecretKey loadOrGenerateSecretKey(){
-        try {
-            File file = new File(SECRET_FILE_PATH);
-
-            if (file.exists()) {
-                String keyString = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8).trim();
-                byte [] keyBytes = Decoders.BASE64.decode(keyString);
-                return Keys.hmacShaKeyFor(keyBytes);
-            }
-            else {
-                SecretKey newKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-                String encodedKey = Base64.getEncoder().encodeToString(newKey.getEncoded());
-
-                Files.write(file.toPath(), encodedKey.getBytes(), StandardOpenOption.CREATE);
-                return newKey;
-            }
-        }
-        catch (Exception e) {
-            throw new JwtServiceException("Error reading/writing the JWT secret key file", e);
+            byte[] keyBytes = Decoders.BASE64.decode(secret);
+            this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+        } catch (Exception e) {
+            throw new JwtServiceException("Error initializing the JWT secret key", e);
         }
     }
 
