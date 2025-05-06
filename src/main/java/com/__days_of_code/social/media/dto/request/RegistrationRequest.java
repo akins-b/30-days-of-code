@@ -5,10 +5,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Data
 public class RegistrationRequest {
     @NotBlank(message = "Username is required")
     String username;
@@ -28,4 +28,15 @@ public class RegistrationRequest {
     boolean isVerified = false;
     String course;
     Date createdAt = new Date();
+
+    // Add getters
+    public String getUsername() { return username; }
+    public String getEmail() { return email; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getCourse() { return course; }
+    public UserRole getRole() { return role; }
+    public String getPassword() { return password; }
+    public boolean isVerified() { return isVerified; }
+    public Date getCreatedAt() { return createdAt; }
 }

@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/likes")
-@RequiredArgsConstructor
 public class LikeController {
     private final LikeService likeService;
+
+    public LikeController(LikeService likeService) {
+        this.likeService = likeService;
+    }
 
     // Endpoint to get all likes
     @GetMapping("/all")

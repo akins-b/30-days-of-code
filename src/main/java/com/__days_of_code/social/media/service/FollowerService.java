@@ -15,11 +15,16 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class FollowerService {
     private final FollowerRepo followerRepo;
     private final UserRepo userRepo;
     private final AuthService authService;
+
+    public FollowerService(FollowerRepo followerRepo, UserRepo userRepo, AuthService authService) {
+        this.followerRepo = followerRepo;
+        this.userRepo = userRepo;
+        this.authService = authService;
+    }
 
     /**
      * Follows a user.

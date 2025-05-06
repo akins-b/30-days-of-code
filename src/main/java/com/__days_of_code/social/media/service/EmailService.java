@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
 
 @Service
-@RequiredArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     /**
      * Sends an OTP to the user's email for verification.

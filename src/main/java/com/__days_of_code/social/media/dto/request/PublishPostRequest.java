@@ -1,8 +1,10 @@
 package com.__days_of_code.social.media.dto.request;
 
-import lombok.Data;
-
-@Data
 public class PublishPostRequest {
     long postId;
+
+    // Getters
+    public long getPostId() {
+        return postId;
+    }
 }

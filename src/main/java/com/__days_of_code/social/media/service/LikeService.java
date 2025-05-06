@@ -15,20 +15,26 @@ import com.__days_of_code.social.media.repo.CommentRepo;
 import com.__days_of_code.social.media.repo.LikeRepo;
 import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class LikeService {
     private final LikeRepo likeRepo;
     private final PostRepo postRepo;
     private final CommentRepo commentRepo;
     private final UserRepo userRepo;
     private final AuthService authService;
+
+    public LikeService(LikeRepo likeRepo, PostRepo postRepo, CommentRepo commentRepo, UserRepo userRepo, AuthService authService) {
+        this.likeRepo = likeRepo;
+        this.postRepo = postRepo;
+        this.commentRepo = commentRepo;
+        this.userRepo = userRepo;
+        this.authService = authService;
+    }
 
     /**
      * Retrieves all likes for a given entity (post or comment).

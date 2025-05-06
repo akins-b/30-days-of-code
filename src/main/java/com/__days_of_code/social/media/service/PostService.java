@@ -11,7 +11,6 @@ import com.__days_of_code.social.media.exception.UnauthorizedException;
 import com.__days_of_code.social.media.exception.UserNotFoundException;
 import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +18,18 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PostService {
     private final PostRepo postRepo;
     private final UserRepo userRepo;
     private final AuthService authService;
     private final ModelMapper mapper;
 
+    public PostService(PostRepo postRepo, UserRepo userRepo, AuthService authService, ModelMapper mapper) {
+        this.postRepo = postRepo;
+        this.userRepo = userRepo;
+        this.authService = authService;
+        this.mapper = mapper;
+    }
 
     /**
      * Creates a new post.

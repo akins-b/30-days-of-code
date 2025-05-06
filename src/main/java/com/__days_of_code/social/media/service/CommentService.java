@@ -21,13 +21,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class CommentService {
     private final CommentRepo commentRepo;
     private final PostRepo postRepo;
     private final UserRepo userRepo;
     private final AuthService authService;
     private  final ModelMapper mapper;
+
+    public CommentService(CommentRepo commentRepo, PostRepo postRepo, UserRepo userRepo, AuthService authService, ModelMapper mapper) {
+        this.commentRepo = commentRepo;
+        this.postRepo = postRepo;
+        this.userRepo = userRepo;
+        this.authService = authService;
+        this.mapper = mapper;
+    }
 
     /**
      * Creates a new comment on a post.

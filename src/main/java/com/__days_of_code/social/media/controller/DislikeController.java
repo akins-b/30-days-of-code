@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/dislikes")
-@RequiredArgsConstructor
 public class DislikeController {
     private final DislikeService dislikeService;
+
+    public DislikeController(DislikeService dislikeService) {
+        this.dislikeService = dislikeService;
+    }
 
     // Endpoint to get all dislikes
     @GetMapping("/all")

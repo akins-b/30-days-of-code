@@ -1,7 +1,6 @@
 package com.__days_of_code.social.media.auth;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +11,13 @@ import java.util.Collections;
 import com.__days_of_code.social.media.entity.Users;
 
 @Getter
-@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private final Users user;
+
+    public CustomUserDetails(Users user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

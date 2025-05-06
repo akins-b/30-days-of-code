@@ -7,7 +7,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Data
 @Table(name= "post_likes")
 public class Like {
     @Id
@@ -28,4 +27,46 @@ public class Like {
 
     @Column(name = "created_at", nullable = false)
     Date createdAt;
+
+    // Getters
+    public long getId() {
+        return id;
+    }
+
+    public long getLikeableId() {
+        return likeableId;
+    }
+
+    public LikeableType getLikeableType() {
+        return likeableType;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLikeableId(long likeableId) {
+        this.likeableId = likeableId;
+    }
+
+    public void setLikeableType(LikeableType likeableType) {
+        this.likeableType = likeableType;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

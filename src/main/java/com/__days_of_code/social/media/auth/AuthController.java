@@ -2,11 +2,7 @@ package com.__days_of_code.social.media.auth;
 
 import com.__days_of_code.social.media.dto.request.*;
 import com.__days_of_code.social.media.dto.response.AuthResponse;
-import com.__days_of_code.social.media.dto.response.UserProfileResponse;
-import com.__days_of_code.social.media.entity.Users;
-import com.__days_of_code.social.media.service.OtpService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +10,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequestMapping("/user")
-@RequiredArgsConstructor
 public class AuthController {
-    final AuthService authService;
-    final private OtpService otpService;
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
 
     // Endpoint to register a new user
     @PostMapping("/register")

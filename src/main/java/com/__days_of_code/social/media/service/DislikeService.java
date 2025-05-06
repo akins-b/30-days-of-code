@@ -23,13 +23,20 @@ import java.util.Date;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class DislikeService {
     private final DislikeRepo dislikeRepo;
     private final PostRepo postRepo;
     private final CommentRepo commentRepo;
     private final UserRepo userRepo;
     private final AuthService authService;
+
+    public DislikeService(DislikeRepo dislikeRepo, PostRepo postRepo, CommentRepo commentRepo, UserRepo userRepo, AuthService authService) {
+        this.dislikeRepo = dislikeRepo;
+        this.postRepo = postRepo;
+        this.commentRepo = commentRepo;
+        this.userRepo = userRepo;
+        this.authService = authService;
+    }
 
     /**
      * Retrieves all dislikes for a given entity (post or comment).

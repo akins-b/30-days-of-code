@@ -4,17 +4,18 @@ package com.__days_of_code.social.media.controller;
 import com.__days_of_code.social.media.dto.request.FollowRequest;
 import com.__days_of_code.social.media.dto.response.UserResponse;
 import com.__days_of_code.social.media.service.FollowerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class FollowerController {
     private final FollowerService followerService;
 
+    public FollowerController(FollowerService followerService) {
+        this.followerService = followerService;
+    }
     // Endpoint to follow a user
     @PostMapping("/follow")
     public ResponseEntity<Void> followUser(@RequestBody FollowRequest request) {

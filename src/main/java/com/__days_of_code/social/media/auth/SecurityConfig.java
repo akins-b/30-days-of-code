@@ -27,12 +27,17 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     final UserDetailsService userDetailsService;
     final JWTFilter jwtFilter;
     final LogoutHandler logoutHandler;
+
+    public SecurityConfig(UserDetailsService userDetailsService, JWTFilter jwtFilter, LogoutHandler logoutHandler) {
+        this.userDetailsService = userDetailsService;
+        this.jwtFilter = jwtFilter;
+        this.logoutHandler = logoutHandler;
+    }
 
     /**
      * Configures the security filter chain for the application.

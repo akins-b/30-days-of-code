@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
-@RequiredArgsConstructor
 public class UserProfileController {
 
     private final userProfileService profileService;
+
+    public UserProfileController(userProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     // Endpoint to get the current user's profile
     @GetMapping()

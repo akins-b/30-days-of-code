@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Data
 public class Otp {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -19,4 +18,46 @@ public class Otp {
 
     Date expiryTime;
     Date createdAt = new Date();
+
+    // Getters
+    public long getId() {
+        return id;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public Date getExpiryTime() {
+        return expiryTime;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setExpiryTime(Date expiryTime) {
+        this.expiryTime = expiryTime;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

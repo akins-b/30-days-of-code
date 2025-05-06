@@ -1,11 +1,9 @@
 package com.__days_of_code.social.media.dto.response;
 
 import com.__days_of_code.social.media.entity.Users;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
 public class SharedPostResponse {
     long id;
     String title;
@@ -13,4 +11,24 @@ public class SharedPostResponse {
     Users user;
     String mediaLink;
     Date createdAt;
+
+    // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setBody(String body) {
+        this.body = body;
+    }
+    public void setUser(Users user) {
+        this.user = user;
+    }
+    public void setMediaLink(String mediaLink) {
+        this.mediaLink = mediaLink;
+    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

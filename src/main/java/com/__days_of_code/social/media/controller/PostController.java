@@ -5,7 +5,6 @@ import com.__days_of_code.social.media.dto.response.PostResponse;
 import com.__days_of_code.social.media.dto.response.SharedPostResponse;
 import com.__days_of_code.social.media.enums.PostStatus;
 import com.__days_of_code.social.media.service.PostService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/post")
-@RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     // Endpoint to create a new post
     @PostMapping("/create")

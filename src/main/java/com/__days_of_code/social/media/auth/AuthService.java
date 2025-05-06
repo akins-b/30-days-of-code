@@ -2,7 +2,6 @@ package com.__days_of_code.social.media.auth;
 
 import com.__days_of_code.social.media.dto.request.*;
 import com.__days_of_code.social.media.dto.response.AuthResponse;
-import com.__days_of_code.social.media.dto.response.UserProfileResponse;
 import com.__days_of_code.social.media.entity.Otp;
 import com.__days_of_code.social.media.entity.UserProfile;
 import com.__days_of_code.social.media.enums.TokenType;
@@ -14,9 +13,7 @@ import com.__days_of_code.social.media.jwt.Token;
 import com.__days_of_code.social.media.repo.*;
 import com.__days_of_code.social.media.service.EmailService;
 import com.__days_of_code.social.media.service.OtpService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +27,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
     private final UserRepo userRepo;
     private final JWTService jwtService;
@@ -40,10 +36,20 @@ public class AuthService {
     private final EmailService emailService;
     private final OtpRepo otpRepo;
     private final TokenRepo tokenRepo;
-    private final ModelMapper modelMapper;
-    private final FollowerRepo followRepo;
-    private final PostRepo postRepo;
     private final UserProfileRepo userProfileRepo;
+
+    public AuthService(UserRepo userRepo, JWTService jwtService, AuthenticationManager authenticationManager,
+                       OtpService otpService, EmailService emailService, OtpRepo otpRepo,
+                       TokenRepo tokenRepo, UserProfileRepo userProfileRepo) {
+        this.userRepo = userRepo;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.otpService = otpService;
+        this.emailService = emailService;
+        this.otpRepo = otpRepo;
+        this.tokenRepo = tokenRepo;
+        this.userProfileRepo = userProfileRepo;
+    }
 
     public void registerUser(RegistrationRequest request){
         try {

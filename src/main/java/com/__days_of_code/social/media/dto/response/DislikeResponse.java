@@ -1,14 +1,26 @@
 package com.__days_of_code.social.media.dto.response;
 
 import com.__days_of_code.social.media.enums.LikeableType;
-import lombok.Data;
 
 import java.util.List;
 
-@Data
 public class DislikeResponse {
     long likeableId;
     LikeableType likeableType;
     long dislikeTotalCount;
     List<String> usernames;
+
+    // Setters
+    public void setLikeableId(long likeableId) {
+        this.likeableId = likeableId;
+    }
+    public void setLikeableType(LikeableType likeableType) {
+        this.likeableType = likeableType;
+    }
+    public void setDislikeTotalCount(long dislikeTotalCount) {
+        this.dislikeTotalCount = dislikeTotalCount;
+    }
+    public void setUsernames(List<String> usernames) {
+        this.usernames = usernames;
+    }
 }

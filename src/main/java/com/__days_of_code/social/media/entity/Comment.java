@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Data
 public class Comment implements Likeable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -28,5 +27,51 @@ public class Comment implements Likeable {
     @Override
     public long getId() {
         return id;
+    }
+
+
+    public Post getPost() {
+        return post;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

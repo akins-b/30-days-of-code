@@ -1,11 +1,7 @@
 package com.__days_of_code.social.media.dto.request;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import org.hibernate.validator.constraints.URL;
 
-@Data
 public class UpdateUserProfileRequest {
     String username;
 
@@ -13,4 +9,15 @@ public class UpdateUserProfileRequest {
     String bio;
 
     String profilePictureUrl;
+
+    // Getters
+    public String getUsername() {
+        return username;
+    }
+    public String getBio() {
+        return bio;
+    }
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
 }

@@ -17,7 +17,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class userProfileService {
 
     private final AuthService authService;
@@ -26,6 +25,15 @@ public class userProfileService {
     private final PostRepo postRepo;
     private final ModelMapper modelMapper;
     private final UserProfileRepo userProfileRepo;
+
+    public userProfileService(AuthService authService, UserRepo userRepo, FollowerRepo followerRepo, PostRepo postRepo, ModelMapper modelMapper, UserProfileRepo userProfileRepo) {
+        this.authService = authService;
+        this.userRepo = userRepo;
+        this.followerRepo = followerRepo;
+        this.postRepo = postRepo;
+        this.modelMapper = modelMapper;
+        this.userProfileRepo = userProfileRepo;
+    }
 
     public UserProfileResponse getCurrentUserProfile() {
         long userId = authService.getUserIdFromSecurityContext();
