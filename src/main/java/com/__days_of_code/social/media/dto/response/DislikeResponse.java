@@ -10,6 +10,20 @@ public class DislikeResponse {
     long dislikeTotalCount;
     List<String> usernames;
 
+    // Getters
+    public long getLikeableId() {
+        return likeableId;
+    }
+    public LikeableType getLikeableType() {
+        return likeableType;
+    }
+    public long getDislikeTotalCount() {
+        return dislikeTotalCount;
+    }
+    public List<String> getUsernames() {
+        return usernames;
+    }
+
     // Setters
     public void setLikeableId(long likeableId) {
         this.likeableId = likeableId;

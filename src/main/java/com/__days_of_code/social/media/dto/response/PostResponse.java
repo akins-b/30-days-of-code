@@ -14,6 +14,32 @@ public class PostResponse {
     Date createdAt;
     Date updatedAt;
 
+    // Getters
+    public long getId() {
+        return id;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getBody() {
+        return body;
+    }
+    public Users getUser() {
+        return user;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public String getMediaLink() {
+        return mediaLink;
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
     // Setters
     public void setId(long id) {
         this.id = id;

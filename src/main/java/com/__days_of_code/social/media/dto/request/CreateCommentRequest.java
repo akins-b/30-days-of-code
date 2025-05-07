@@ -13,4 +13,11 @@ public class CreateCommentRequest {
         return content;
     }
 
+    // Setters
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

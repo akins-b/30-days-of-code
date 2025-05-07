@@ -25,7 +25,7 @@ public class AuthController {
         return ResponseEntity.status(201).build();
     }
 
-    // Endpoint to login a user
+    // Endpoint to log in a user
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         AuthResponse response =  authService.verifyUser(request);

@@ -7,6 +7,23 @@ public class CommentResponse {
     String content;
     String createdAt;
 
+    // Getters
+    public long getId() {
+        return id;
+    }
+    public long getPostId() {
+        return postId;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getContent() {
+        return content;
+    }
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
     // Setters
     public void setId(long id) {
         this.id = id;

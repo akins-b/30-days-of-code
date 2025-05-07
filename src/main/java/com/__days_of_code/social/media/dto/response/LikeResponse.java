@@ -10,6 +10,19 @@ public class LikeResponse {
     long totalLikes;
     List<String> usernames;
 
+    // Getters
+    public long getLikeableId() {
+        return likeableId;
+    }
+    public LikeableType getLikeableType() {
+        return likeableType;
+    }
+    public long getTotalLikes() {
+        return totalLikes;
+    }
+    public List<String> getUsernames() {
+        return usernames;
+    }
     // Setters
     public void setLikeableId(long likeableId) {
         this.likeableId = likeableId;

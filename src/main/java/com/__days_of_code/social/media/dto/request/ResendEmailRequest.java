@@ -7,4 +7,9 @@ public class ResendEmailRequest {
     public String getEmail() {
         return email;
     }
+
+    // Setters
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

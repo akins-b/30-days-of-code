@@ -39,4 +39,16 @@ public class RegistrationRequest {
     public String getPassword() { return password; }
     public boolean isVerified() { return isVerified; }
     public Date getCreatedAt() { return createdAt; }
+
+    // Add setters
+    public void setUsername(String username) { this.username = username; }
+    public void setEmail(String email) { this.email = email; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setCourse(String course) { this.course = course; }
+    public void setRole(UserRole role) { this.role = role; }
+    public void setPassword(String password) { this.password = password; }
+    public void setVerified(boolean verified) { isVerified = verified; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt;}
+
 }

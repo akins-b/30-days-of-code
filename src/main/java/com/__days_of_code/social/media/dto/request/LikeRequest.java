@@ -14,4 +14,12 @@ public class LikeRequest {
     public long getLikeableId() {
         return likeableId;
     }
+
+    // Setters
+    public void setLikeableType(LikeableType likeableType) {
+        this.likeableType = likeableType;
+    }
+    public void setLikeableId(long likeableId) {
+        this.likeableId = likeableId;
+    }
 }

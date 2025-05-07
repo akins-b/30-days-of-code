@@ -14,4 +14,12 @@ public class DislikeRequest {
     public LikeableType getLikeableType() {
         return likeableType;
     }
+
+    // Setters
+    public void setLikeableId(long likeableId) {
+        this.likeableId = likeableId;
+    }
+    public void setLikeableType(LikeableType likeableType) {
+        this.likeableType = likeableType;
+    }
 }

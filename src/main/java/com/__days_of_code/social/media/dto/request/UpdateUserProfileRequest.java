@@ -20,4 +20,16 @@ public class UpdateUserProfileRequest {
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
+
+    // Setters
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
 }

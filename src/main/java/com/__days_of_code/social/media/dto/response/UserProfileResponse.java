@@ -10,6 +10,32 @@ public class UserProfileResponse {
     int numberOfFollowers;
     int numberOfFollowing;
 
+    // Getters
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getBio() {
+        return bio;
+    }
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+    public int getNumberOfPosts() {
+        return numberOfPosts;
+    }
+    public int getNumberOfFollowers() {
+        return numberOfFollowers;
+    }
+    public int getNumberOfFollowing() {
+        return numberOfFollowing;
+    }
+
     // Setters
     public void setFirstName(String firstName) {
         this.firstName = firstName;

@@ -7,4 +7,9 @@ public class FollowRequest {
     public long getFollowingUserId() {
         return followingUserId;
     }
+
+    // Setters
+    public void setFollowingUserId(long followingUserId) {
+        this.followingUserId = followingUserId;
+    }
 }

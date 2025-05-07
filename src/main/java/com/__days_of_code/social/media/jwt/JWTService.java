@@ -24,8 +24,17 @@ public class JWTService {
 
     public JWTService(@Value("${jwt.secret:}") String secret) {
         try {
+            if (secret == null || secret.isEmpty()) {
+                throw new JwtServiceException("JWT secret is missing or empty");
+            }
             byte[] keyBytes = Decoders.BASE64.decode(secret);
+            if (keyBytes.length < 32) {
+                throw new JwtServiceException("JWT secret key must be at least 256 bits (32 bytes) after Base64 decoding.");
+            }
+
             this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+        } catch (IllegalArgumentException e) {
+            throw new JwtServiceException("Invalid Base64 encoding for JWT secret key", e);
         } catch (Exception e) {
             throw new JwtServiceException("Error initializing the JWT secret key", e);
         }

@@ -7,4 +7,9 @@ public class PublishPostRequest {
     public long getPostId() {
         return postId;
     }
+
+    // Setters
+    public void setPostId(long postId) {
+        this.postId = postId;
+    }
 }

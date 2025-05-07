@@ -12,6 +12,26 @@ public class SharedPostResponse {
     String mediaLink;
     Date createdAt;
 
+    // Getters
+    public long getId() {
+        return id;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getBody() {
+        return body;
+    }
+    public Users getUser() {
+        return user;
+    }
+    public String getMediaLink() {
+        return mediaLink;
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
     // Setters
     public void setId(long id) {
         this.id = id;

@@ -2,6 +2,7 @@ package com.__days_of_code.social.media.jwt;
 
 import com.__days_of_code.social.media.entity.Users;
 import com.__days_of_code.social.media.enums.TokenType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
@@ -23,6 +24,7 @@ public class Token {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     Users user;
 
     //Getters
@@ -41,6 +43,7 @@ public class Token {
     public boolean isRevoked() {
         return revoked;
     }
+
     public Users getUser() {
         return user;
     }
