@@ -12,6 +12,9 @@ import com.__days_of_code.social.media.exception.UserNotFoundException;
 import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -119,9 +122,11 @@ public class PostService {
      *
      * @return a list of post responses for the user
      */
-    public List<PostResponse> getAllPosts(){
+    public List<PostResponse> getAllPosts(QueryPosts request) {
         long userId = authService.getUserIdFromSecurityContext();
-        List<Post> posts = postRepo.findAllByUserId(userId)
+
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        Page<Post> posts = postRepo.findAllByUserId(userId, pageable)
                 .orElseThrow(() -> new EntityNotFoundException("No posts found for user ID: " + userId));
         return posts.stream()
                 .map(post -> mapper.map(post, PostResponse.class))

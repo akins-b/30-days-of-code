@@ -2,6 +2,8 @@ package com.__days_of_code.social.media.service;
 
 import com.__days_of_code.social.media.auth.AuthService;
 import com.__days_of_code.social.media.dto.request.CreateCommentRequest;
+import com.__days_of_code.social.media.dto.request.QueryPostComment;
+import com.__days_of_code.social.media.dto.request.QueryUserComment;
 import com.__days_of_code.social.media.dto.request.UpdateCommentRequest;
 import com.__days_of_code.social.media.dto.response.CommentResponse;
 import com.__days_of_code.social.media.entity.Comment;
@@ -14,6 +16,9 @@ import com.__days_of_code.social.media.repo.PostRepo;
 import com.__days_of_code.social.media.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -92,30 +97,32 @@ public class CommentService {
 
     /**
      * Retrieves all comments for a specific post.
-     *
-     * @param postId the ID of the post
-     * @return a list of comment responses
      */
-    public List<CommentResponse> getAllCommentsByPost(Long postId) {
-        List<Comment> comments = commentRepo.findAllByPostId(postId);
-        return comments.stream()
-                .map(comment -> {
-                    CommentResponse response = mapper.map(comment, CommentResponse.class);
-                    response.setUsername(comment.getUser().getUsername());
-                    return response;
-                })
-                .toList();
+    public Page<CommentResponse> getAllCommentsByPost(QueryPostComment request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        Page<Comment> comments = commentRepo.findAllByPostId(request.getPostId(), pageable);
+        if (comments.isEmpty()) {
+            return Page.empty();
+        }
+        return comments.map(comment -> {
+            CommentResponse response = mapper.map(comment, CommentResponse.class);
+            response.setUsername(comment.getUser().getUsername());
+            return response;
+        });
     }
 
-    public List<CommentResponse> getAllCommentsByUser() {
+    public Page<CommentResponse> getAllCommentsByUser(QueryUserComment request) {
         long userId = authService.getUserIdFromSecurityContext();
-        List<Comment> comments = commentRepo.findAllByUserId(userId);
-        return comments.stream()
-                .map(comment -> {
-                    CommentResponse response = mapper.map(comment, CommentResponse.class);
-                    response.setUsername(comment.getUser().getUsername());
-                    return response;
-                })
-                .toList();
+
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        Page<Comment> comments = commentRepo.findAllByUserId(userId, pageable);
+        if (comments.isEmpty()) {
+            return Page.empty();
+        }
+        return comments.map(comment -> {
+            CommentResponse response = mapper.map(comment, CommentResponse.class);
+            response.setUsername(comment.getUser().getUsername());
+            return response;
+        });
     }
 }

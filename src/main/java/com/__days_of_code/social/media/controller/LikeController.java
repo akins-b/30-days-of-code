@@ -18,7 +18,7 @@ public class LikeController {
     }
 
     // Endpoint to get all likes
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<LikeResponse> getAllLikes(@RequestBody QueryLike request){
         return ResponseEntity.ok(likeService.getAllLikes(request));
     }
@@ -31,7 +31,7 @@ public class LikeController {
     }
 
     // Endpoint to remove a like
-    @PostMapping("/remove")
+    @DeleteMapping("/remove")
     public ResponseEntity<?> unlikeEntity(@RequestBody LikeRequest request){
         likeService.unlikeEntity(request);
         return ResponseEntity.status(204).build();

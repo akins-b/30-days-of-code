@@ -50,8 +50,8 @@ public class PostController {
 
     //Endpoint to get all posts for a user
     @GetMapping("/all")
-    public ResponseEntity<List<PostResponse>> getAllPosts() {
-        List<PostResponse> postResponses = postService.getAllPosts();
+    public ResponseEntity<List<PostResponse>> getAllPosts(QueryPosts request) {
+        List<PostResponse> postResponses = postService.getAllPosts(request);
         return ResponseEntity.ok(postResponses);
     }
 
